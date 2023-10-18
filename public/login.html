@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="./styles/login.css">
+</head>
+<body>
+    
+    <form class="inputForm" action="/login" method="post">
+        <!-- ... All your input fields, checkboxes, and button ... -->
+        <img src="images/dark-logo.png" class="logo" alt="">
+        <div>
+            <input type="email" name="email" autocomplete="off" id="email" placeholder="email" required pattern="[A-Za-z0-9_]+@[A-Za-z0-9]+\.[A-Za-z]{2,}" title="Please enter a valid email address ">
+            <input type="password" name="password" autocomplete="off" id="password" placeholder="password" required pattern=".{8,}" title="Password must be at least 8 characters long">
+            <button type="submit" name="submitButton" class="submit-btn">Sign In</button>
+        </div>
+    </form>
+
+    <script>
+        window.addEventListener("load", () => {
+          const urlParams = new URLSearchParams(window.location.search);
+          const errorMessage = urlParams.get("error");
+          
+          if (errorMessage) {
+            alert(errorMessage);
+          }
+        });
+      </script>
+</body>
+</html>

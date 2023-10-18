@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+    <link rel="stylesheet" href="./styles/signup.css">
+</head>
+<body>
+
+<form class="inputForm" action="/signup" method="post">
+    <!-- ... All your input fields, checkboxes, and button ... -->
+    <img src="images/dark-logo.png" class="logo" alt="">
+    <div>
+        <input type="text" name="name" autocomplete="off" id="name" placeholder="name" required title="Enter your name">
+        <input type="email" name="email" autocomplete="off" id="email" placeholder="email" required pattern="[A-Za-z0-9_]+@[A-Za-z0-9]+\.[A-Za-z]{2,}" title="Please enter a valid email address ">
+        <input type="password" name="password" autocomplete="off" id="password" placeholder="password" required pattern=".{8,}" title="Password must be at least 8 characters long">
+        <input type="text" name="number" autocomplete="off" id="number" placeholder="number" required pattern="[0-9]{10}" title="Phone number must be 10 digit">
+        <input type="checkbox" name="termsAndConditons" class="checkbox" id="terms-and-cond" value="true">
+        <label for="terms-and-cond">agree to our <a href="">terms and conditions</a></label>
+        <button type="submit" name="submitButton" class="submit-btn">create account</button>
+    </div>
+    <a href="/login" class="link">already have an account? Log in here</a>
+</form>
+  
+
+<script>
+    
+    window.addEventListener("load", () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const successMessage = urlParams.get("message");
+          
+        if (successMessage) {
+          alert(successMessage);
+        }
+    });
+
+  </script>
+  
+ 
+</body>
+</html>
