@@ -5,6 +5,8 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { check , validationResult } from "express-validator";
 import bcrypt from "bcrypt";
+import session from "express-session";
+import crypto from "crypto";
 const _dirname = dirname(fileURLToPath(import.meta.url));
 
 mongoose.connect("mongodb://127.0.0.1:27017/ecommerceDB");
@@ -17,6 +19,16 @@ async function main(){
     app.use(bodyParser.urlencoded({extended: true}));
 
     app.use(express.static("public"));
+
+    // Generate a random secure secret key
+    const secretKey = crypto.randomBytes(32).toString("hex");
+
+    // Use the express-session middleware
+    app.use(session({
+        secret: secretKey, 
+        resave: false,
+        saveUninitialized: true,
+    }));
 
     const userSchema = new mongoose.Schema({
         name: {
@@ -41,6 +53,7 @@ async function main(){
     const User = new mongoose.model("User" , userSchema);
 
     app.get("/", (req , res)=>{
+        // Determine the user's login status
         res.sendFile(_dirname + "/public/index.html");
     });
 
@@ -83,7 +96,7 @@ async function main(){
           });
     
           await user.save();
-          res.redirect('/');
+          res.redirect('/?login=success');
         } catch (error) {
           console.error(error);
           res.status(500).send('Error registering user');
@@ -121,14 +134,22 @@ async function main(){
         const passwordMatch = await bcrypt.compare(password, user.password);
       
         if (passwordMatch) {
-           // Redirect to the login page with a success message
-            return res.redirect("/");
+           // Set the session to remember the login status
+            req.session.isLoggedIn = true;
+            // Redirect to the login page with a success message
+            return res.redirect("/?login=success");
         } else {
           // Redirect to the login page with an error message
             return res.redirect("/login?error=Incorrect password");
         }
 
     });
+
+    app.get("/logout", (req, res) => {
+        req.session.isLoggedIn = false; // Clear the session to log the user out
+        res.redirect("/");
+    });
+    
 
     app.get("/search" , (req , res)=>{
         res.sendFile(_dirname + "/public/search.html");
