@@ -53,7 +53,6 @@ async function main(){
     const User = new mongoose.model("User" , userSchema);
 
     app.get("/", (req , res)=>{
-        // Determine the user's login status
         res.sendFile(_dirname + "/public/index.html");
     });
 
