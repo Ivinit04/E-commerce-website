@@ -4,6 +4,20 @@ function clearLocalStorage() {
     localStorage.setItem("isLoggedIn", "false");
 }
 
+function changeClass(event) {
+  event.preventDefault(); // Prevent the default behavior (e.g., navigating to a new page)
+
+  const listItems = document.querySelectorAll(".nav .nav-link");
+
+  listItems.forEach((item) => {
+    item.classList.remove("text-secondary");
+    item.classList.add("text-white");
+  });
+
+  event.target.classList.add("text-secondary");
+  event.target.classList.remove("text-white");
+}
+
 window.addEventListener("load", () => {
     // Get the URL parameters
     const headerDiv = document.getElementById("header");
@@ -27,11 +41,10 @@ window.addEventListener("load", () => {
           </a>
     
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+            <li><a href="/" class="nav-link px-2 text-secondary" onclick="changeClass(event)">Home</a></li>
+            <li><a href="#" class="nav-link px-2 text-white" onclick="changeClass(event)">Men</a></li>
+            <li><a href="#" class="nav-link px-2 text-white" onclick="changeClass(event)">Women</a></li>
+            <li><a href="#" class="nav-link px-2 text-white" onclick="changeClass(event)">Accessories</a></li>
           </ul>
     
           <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" onsubmit="redirectToSearch(); return false;">
@@ -43,11 +56,11 @@ window.addEventListener("load", () => {
               <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
             </a>
             <ul class="dropdown-menu text-small">
-              <li><a class="dropdown-item" href="#">New project...</a></li>
-              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><a class="dropdown-item" href="#">My Cart</a></li>
+              <li><a class="dropdown-item" href="#">Wishlist</a></li>
               <li><a class="dropdown-item" href="#">Profile</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="/logout" onclick="clearLocalStorage()">Sign out</a></li>
+              <li><a class="dropdown-item" href="/logout" onclick="clearLocalStorage()">Sign Out</a></li>
             </ul>
           </div>
         </div>
@@ -59,11 +72,10 @@ window.addEventListener("load", () => {
           </a>
   
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+            <li><a href="/" class="nav-link px-2 text-secondary" onclick="changeClass(event)">Home</a></li>
+            <li><a href="/" class="nav-link px-2 text-white" onclick="changeClass(event)">Men</a></li>
+            <li><a href="/" class="nav-link px-2 text-white" onclick="changeClass(event)">Women</a></li>
+            <li><a href="/" class="nav-link px-2 text-white" onclick="changeClass(event)">Accessories</a></li>
           </ul>
   
           <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" onsubmit="redirectToSearch(); return false;">
