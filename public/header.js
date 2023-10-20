@@ -10,7 +10,12 @@ function changeClass(event) {
   const clickedIndex = Array.from(listItems).indexOf(event.target);
 
   // Save the clicked index to localStorage
-  localStorage.setItem("clickedIndex", clickedIndex);
+  localStorage.setItem("clickedIndex", clickedIndex); 
+}
+
+function collectionLinkClicked(event, identifier) {
+  // Save the collection identifier to localStorage
+  localStorage.setItem("collectionIdentifier", identifier);
 }
 
 
@@ -69,7 +74,7 @@ window.addEventListener("load", () => {
   
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
             <li><a href="/" class="nav-link px-2 text-secondary" onclick="changeClass(event)">Home</a></li>
-            <li><a href="/product" class="nav-link px-2 text-white" onclick="changeClass(event)">Men</a></li>
+            <li><a href="/product" class="nav-link px-2 text-white" onclick="changeClass(event)" >Men</a></li>
             <li><a href="/product" class="nav-link px-2 text-white" onclick="changeClass(event)">Women</a></li>
             <li><a href="/product" class="nav-link px-2 text-white" onclick="changeClass(event)">Accessories</a></li>
           </ul>
@@ -92,6 +97,36 @@ window.addEventListener("load", () => {
     When you click on a navigation link, you toggle the class of the clicked link, changing it from text-white to text-secondary. */ 
     const listItems = document.querySelectorAll(".nav .nav-link");
     const clickedIndex = localStorage.getItem("clickedIndex");
+    const collectionIdentifier = localStorage.getItem("collectionIdentifier");
+
+    if (collectionIdentifier !== null) {
+        // Remove text-secondary class from all anchors
+        listItems.forEach((item) => {
+            item.classList.remove("text-secondary");
+            item.classList.add("text-white");
+        });
+
+        // Apply the class change based on the identifier
+        switch (collectionIdentifier) {
+            case 'women':
+                listItems[2].classList.add("text-secondary");
+                listItems[2].classList.remove("text-white");
+                break;
+            case 'men':
+                listItems[1].classList.add("text-secondary");
+                listItems[1].classList.remove("text-white");
+                break;
+            case 'accessories':
+                listItems[3].classList.add("text-secondary");
+                listItems[3].classList.remove("text-white");
+                break;
+            default:
+                // Handle other cases or do nothing
+        }
+    }
+
+    // Clear the saved  index
+    localStorage.removeItem("collectionIdentifier")
   
     if (clickedIndex !== null) {
       // Remove text-secondary class from all anchors
@@ -104,9 +139,9 @@ window.addEventListener("load", () => {
       listItems[clickedIndex].classList.add("text-secondary");
       listItems[clickedIndex].classList.remove("text-white");
     }
-    
     // Clear the saved index from localStorage
     localStorage.removeItem("clickedIndex");
+       
 });
 
 
