@@ -1,3 +1,5 @@
+import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
@@ -6,7 +8,6 @@ import { fileURLToPath } from "url";
 import { check , validationResult } from "express-validator";
 import bcrypt from "bcrypt";
 import session from "express-session";
-import crypto from "crypto";
 const _dirname = dirname(fileURLToPath(import.meta.url));
 
 mongoose.connect("mongodb://127.0.0.1:27017/ecommerceDB");
@@ -20,14 +21,11 @@ async function main(){
 
     app.use(express.static("public"));
 
-    // Generate a random secure secret key
-    const secretKey = crypto.randomBytes(32).toString("hex");
-
     // Use the express-session middleware
     app.use(session({
-        secret: secretKey, 
+        secret: process.env.SECRET_KEY, 
         resave: false,
-        saveUninitialized: true,
+        saveUninitialized: false,
     }));
 
     const userSchema = new mongoose.Schema({
@@ -53,7 +51,8 @@ async function main(){
     const User = new mongoose.model("User" , userSchema);
 
     app.get("/", (req , res)=>{
-        res.sendFile(_dirname + "/public/index.html");
+        const isLoggedIn = req.session.isLoggedIn || false;
+        res.render("index.ejs" , {isLoggedIn});
     });
 
     app.get("/signup" , (req , res)=>{
@@ -85,6 +84,7 @@ async function main(){
         }
     
         try {
+          // A hashed password is used for security purposes/Password Storage, especially in the context of user authentication and data protection.
           const hashedPassword = await bcrypt.hash(password, 10);
           const user = new User({
             name,
@@ -95,7 +95,7 @@ async function main(){
           });
     
           await user.save();
-          res.redirect('/?login=success');
+          res.redirect('/');
         } catch (error) {
           console.error(error);
           res.status(500).send('Error registering user');
@@ -136,7 +136,7 @@ async function main(){
            // Set the session to remember the login status
             req.session.isLoggedIn = true;
             // Redirect to the login page with a success message
-            return res.redirect("/?login=success");
+            return res.redirect("/");
         } else {
           // Redirect to the login page with an error message
             return res.redirect("/login?error=Incorrect password");
@@ -151,12 +151,54 @@ async function main(){
     
 
     app.get("/search" , (req , res)=>{
-        res.sendFile(_dirname + "/public/search.html");
+        const isLoggedIn = req.session.isLoggedIn || false;
+        res.render("search.ejs" , {isLoggedIn});
     });
 
     app.get("/product" , (req , res)=>{
-        res.sendFile(_dirname + "/public/product.html");
+        const isLoggedIn = req.session.isLoggedIn || false;
+        res.render("product.ejs" , {isLoggedIn});
     });
+
+    app.post("/product" , (req , res)=>{
+        // Retrieve product details from the request
+        // console.log(req.body);
+        const { name, price, size } = req.body;
+
+        // Create a new cart item object
+        const cartItem = { name, price, size };
+
+        // Add the item to the user's cart stored in the session, if not create empty
+        if(req.session.isLoggedIn === true){
+            req.session.cart = req.session.cart || [];
+            req.session.cart.push(cartItem);
+            res.redirect("/cart");
+        }else{
+            res.redirect("/login")
+        }
+        
+    })
+
+    app.get("/cart" , (req , res) =>{
+        if(req.session.isLoggedIn === true){
+            const cartItems = req.session.cart || [];
+            res.render('cart.ejs' , {cartItems});
+        }else{
+            res.redirect("/login");
+        }
+        
+    })
+
+    app.post("/cart" , (req , res)=>{
+        // console.log(req.body);
+        const { index } = req.body;
+        if (req.session.cart && req.session.cart.length > index) {
+            req.session.cart.splice(index, 1);
+            res.redirect("/cart");
+        } else {
+            res.sendStatus(400);
+        }
+    })
 
     app.listen(port , () => {
         console.log(`Server running on port ${port}`);

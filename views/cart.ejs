@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="./styles/cart.css">
+</head>
+<body>
+
+    
+    <!-- Include your other HTML code as needed -->
+    <div id="cart-container">
+        <!-- Cart items will be displayed here -->
+
+    <!-- // Check if the cart is empty -->
+    <%  if (cartItems.length === 0) { %>
+        <p>Your cart is empty.</p>
+    <%   } else { %>
+        <!-- // Loop through the cart items and display them -->
+        <%  cartItems.forEach((item, index) => { %>
+            <form action="/cart" method="POST">
+                <div>
+                    <p>Item <%= index + 1 %>:</p>
+                    <p>Name: <%= item.name %></p>
+                    <p>Price: <%= item.price %></p>
+                    <p>Size: <%= item.size %></p>
+                    <input type="hidden" name="index" value="<%= index %>">
+                    <button type="submit" class="remove-button">Remove</button>
+                </div>
+            </form>
+        <%  }); %>
+    <%  } %>
+    </div>
+
+</body>
+</html>

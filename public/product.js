@@ -22,3 +22,26 @@ sizeBtns.forEach((item, i) => { // looping through each button
         checkedBtn = i; // upading the variable
     })
 })
+
+// Add a click event handler to the "Add to Cart" button
+document.querySelector('.cart-btn').addEventListener('click', addToCart);
+
+function addToCart() {
+  // Capture the product details from the product page
+  const productDetails = {
+    name: document.querySelector('.product-brand').textContent,
+    price: document.querySelector('.product-price').textContent,
+    size: getSelectedSize(), // Implement a function to get the selected size
+  };
+}
+
+function getSelectedSize() {
+  const sizeRadioButtons = document.querySelectorAll('input[type="radio"][name="size"]');
+  for (const radioButton of sizeRadioButtons) {
+    if (radioButton.checked) {
+      return radioButton.value;
+    }
+  }
+  return null; // Handle the case where no size is selected
+}
+

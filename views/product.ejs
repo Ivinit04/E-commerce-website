@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <link rel="stylesheet" href="./styles/home.css">
+    <link rel="stylesheet" href="./styles/product.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+
+    <%- include("partials/header.ejs" , {isLoggedIn: isLoggedIn}) %>
+
+    <section class="product-details">
+        <div class="image-slider">
+            <div class="product-images">
+                <img src="images/product image 1.png" class="active" alt="product 1">
+                <img src="images/product image 2.png" alt="product 2">
+                <img src="images/product image 3.png" alt="product 3">
+                <img src="images/product image 4.png" alt="product 4">
+            </div>
+        </div>
+        <div class="details">
+            <h2 class="product-brand">calvin klein</h2>
+            <p class="product-short-des">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+            <span class="product-price">$99</span>
+            <span class="product-actual-price">$200</span>
+            <span class="product-discount">( 50% off )</span>
+    
+            <p class="product-sub-heading">select size</p>
+    
+            <form action="/product" method="POST">
+            <input type="radio" name="size" value="s" checked hidden id="s-size">
+            <label for="s-size" class="size-radio-btn check">s</label>
+            <input type="radio" name="size" value="m" hidden id="m-size">
+            <label for="m-size" class="size-radio-btn">m</label>
+            <input type="radio" name="size" value="l" hidden id="l-size">
+            <label for="l-size" class="size-radio-btn">l</label>
+            <input type="radio" name="size" value="xl" hidden id="xl-size">
+            <label for="xl-size" class="size-radio-btn">xl</label>
+            <input type="radio" name="size" value="xxl" hidden id="xxl-size">
+            <label for="xxl-size" class="size-radio-btn">xxl</label>
+
+            <input type="hidden" name="name" value="calvin klein">
+            <input type="hidden" name="price" value="$99">
+    
+            <button type="submit" class="Btn cart-btn cart-item-count">add to cart</button>
+            <button class="Btn">add to wishlist</button>
+            </form>
+        </div> 
+    </section>
+
+    <section class="detail-des">
+        <h2 class="heading">description</h2>
+        <p class="des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam,</p>
+    </section>
+    
+    <section class="product">
+        <h2 class="product-category">Similar Products</h2>
+
+        <button class="pre-btn" ><img src="./images/arrow.png" alt=""></button>
+        <button class="nxt-btn" ><img src="./images/arrow.png" alt=""></button>
+
+        <div class="product-container">
+            <div class="product-card" id="card1">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <a href="/product"><img src="./images/card1.png" class="product-thumb" alt=""></a>
+                    <button class="card-btn">add to whislist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">brand</h2>
+                    <p class="product-short-des">a short line about the cloth..</p>
+                    <span class="price">$20</span><span class="actual-price">$40</span>
+                </div>
+            </div>
+
+            <div class="product-card" id="card2">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <a href="/product"><img src="./images/card2.png" class="product-thumb" alt=""></a>
+                    <button class="card-btn">add to whislist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">brand</h2>
+                    <p class="product-short-des">a short line about the cloth..</p>
+                    <span class="price">$20</span><span class="actual-price">$40</span>
+                </div>
+            </div>
+
+            <div class="product-card" id="card3">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <a href="/product"><img src="./images/card3.png" class="product-thumb" alt=""></a>
+                    <button class="card-btn">add to whislist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">brand</h2>
+                    <p class="product-short-des">a short line about the cloth..</p>
+                    <span class="price">$20</span><span class="actual-price">$40</span>
+                </div>
+            </div>
+
+            <div class="product-card" id="card4">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <a href="/product"><img src="./images/card4.png" class="product-thumb" alt=""></a>
+                    <button class="card-btn">add to whislist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">brand</h2>
+                    <p class="product-short-des">a short line about the cloth..</p>
+                    <span class="price">$20</span><span class="actual-price">$40</span>
+                </div>
+            </div>
+
+            <div class="product-card" id="card5">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <a href="/product"><img src="./images/card5.png" class="product-thumb" alt=""></a>
+                    <button class="card-btn">add to whislist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">brand</h2>
+                    <p class="product-short-des">a short line about the cloth..</p>
+                    <span class="price">$20</span><span class="actual-price">$40</span>
+                </div>
+            </div>
+
+            <div class="product-card" id="card6">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <a href="/product"><img src="./images/card6.png" class="product-thumb" alt=""></a>
+                    <button class="card-btn">add to whislist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">brand</h2>
+                    <p class="product-short-des">a short line about the cloth..</p>
+                    <span class="price">$20</span><span class="actual-price">$40</span>
+                </div>
+            </div>
+
+            <div class="product-card" id="card7">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <a href="/product"><img src="./images/card7.png" class="product-thumb" alt=""></a>
+                    <button class="card-btn">add to whislist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">brand</h2>
+                    <p class="product-short-des">a short line about the cloth..</p>
+                    <span class="price">$20</span><span class="actual-price">$40</span>
+                </div>
+            </div>
+
+            <div class="product-card" id="card8">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <a href="/product"><img src="./images/card8.png" class="product-thumb" alt=""></a>
+                    <button class="card-btn">add to whislist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">brand</h2>
+                    <p class="product-short-des">a short line about the cloth..</p>
+                    <span class="price">$20</span><span class="actual-price">$40</span>
+                </div>
+            </div>
+
+            <div class="product-card" id="card9">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <a href="/product"><img src="./images/card9.png" class="product-thumb" alt=""></a>
+                    <button class="card-btn">add to whislist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">brand</h2>
+                    <p class="product-short-des">a short line about the cloth..</p>
+                    <span class="price">$20</span><span class="actual-price">$40</span>
+                </div>
+            </div>
+
+            <div class="product-card" id="card10">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <a href="/product"><img src="./images/card10.png" class="product-thumb" alt=""></a>
+                    <button class="card-btn">add to whislist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">brand</h2>
+                    <p class="product-short-des">a short line about the cloth..</p>
+                    <span class="price">$20</span><span class="actual-price">$40</span>
+                </div>
+            </div>
+
+            <div class="product-card" id="card11">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <a href="/product"><img src="./images/card11.png" class="product-thumb" alt=""></a>
+                    <button class="card-btn">add to whislist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">brand</h2>
+                    <p class="product-short-des">a short line about the cloth..</p>
+                    <span class="price">$20</span><span class="actual-price">$40</span>
+                </div>
+            </div>
+
+            <div class="product-card" id="card12">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <a href="/product"><img src="./images/card12.png" class="product-thumb" alt=""></a>
+                    <button class="card-btn">add to whislist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">brand</h2>
+                    <p class="product-short-des">a short line about the cloth..</p>
+                    <span class="price">$20</span><span class="actual-price">$40</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="product">
+
+        <button class="pre-btn" ><img src="./images/arrow.png" alt=""></button>
+        <button class="nxt-btn" ><img src="./images/arrow.png" alt=""></button>
+
+        <div class="product-container">
+            <div class="product-card" id="card1">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <a href="/product"><img src="./images/card1.png" class="product-thumb" alt=""></a>
+                    <button class="card-btn">add to whislist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">brand</h2>
+                    <p class="product-short-des">a short line about the cloth..</p>
+                    <span class="price">$20</span><span class="actual-price">$40</span>
+                </div>
+            </div>
+
+            <div class="product-card" id="card2">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <a href="/product"><img src="./images/card2.png" class="product-thumb" alt=""></a>
+                    <button class="card-btn">add to whislist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">brand</h2>
+                    <p class="product-short-des">a short line about the cloth..</p>
+                    <span class="price">$20</span><span class="actual-price">$40</span>
+                </div>
+            </div>
+
+            <div class="product-card" id="card3">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <a href="/product"><img src="./images/card3.png" class="product-thumb" alt=""></a>
+                    <button class="card-btn">add to whislist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">brand</h2>
+                    <p class="product-short-des">a short line about the cloth..</p>
+                    <span class="price">$20</span><span class="actual-price">$40</span>
+                </div>
+            </div>
+
+            <div class="product-card" id="card4">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <a href="/product"><img src="./images/card4.png" class="product-thumb" alt=""></a>
+                    <button class="card-btn">add to whislist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">brand</h2>
+                    <p class="product-short-des">a short line about the cloth..</p>
+                    <span class="price">$20</span><span class="actual-price">$40</span>
+                </div>
+            </div>
+
+            <div class="product-card" id="card5">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <a href="/product"><img src="./images/card5.png" class="product-thumb" alt=""></a>
+                    <button class="card-btn">add to whislist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">brand</h2>
+                    <p class="product-short-des">a short line about the cloth..</p>
+                    <span class="price">$20</span><span class="actual-price">$40</span>
+                </div>
+            </div>
+
+            <div class="product-card" id="card6">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <a href="/product"><img src="./images/card6.png" class="product-thumb" alt=""></a>
+                    <button class="card-btn">add to whislist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">brand</h2>
+                    <p class="product-short-des">a short line about the cloth..</p>
+                    <span class="price">$20</span><span class="actual-price">$40</span>
+                </div>
+            </div>
+
+            <div class="product-card" id="card7">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <a href="/product"><img src="./images/card7.png" class="product-thumb" alt=""></a>
+                    <button class="card-btn">add to whislist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">brand</h2>
+                    <p class="product-short-des">a short line about the cloth..</p>
+                    <span class="price">$20</span><span class="actual-price">$40</span>
+                </div>
+            </div>
+
+            <div class="product-card" id="card8">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <a href="/product"><img src="./images/card8.png" class="product-thumb" alt=""></a>
+                    <button class="card-btn">add to whislist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">brand</h2>
+                    <p class="product-short-des">a short line about the cloth..</p>
+                    <span class="price">$20</span><span class="actual-price">$40</span>
+                </div>
+            </div>
+
+            <div class="product-card" id="card9">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <a href="/product"><img src="./images/card9.png" class="product-thumb" alt=""></a>
+                    <button class="card-btn">add to whislist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">brand</h2>
+                    <p class="product-short-des">a short line about the cloth..</p>
+                    <span class="price">$20</span><span class="actual-price">$40</span>
+                </div>
+            </div>
+
+            <div class="product-card" id="card10">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <a href="/product"><img src="./images/card10.png" class="product-thumb" alt=""></a>
+                    <button class="card-btn">add to whislist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">brand</h2>
+                    <p class="product-short-des">a short line about the cloth..</p>
+                    <span class="price">$20</span><span class="actual-price">$40</span>
+                </div>
+            </div>
+
+            <div class="product-card" id="card11">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <a href="/product"><img src="./images/card11.png" class="product-thumb" alt=""></a>
+                    <button class="card-btn">add to whislist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">brand</h2>
+                    <p class="product-short-des">a short line about the cloth..</p>
+                    <span class="price">$20</span><span class="actual-price">$40</span>
+                </div>
+            </div>
+
+            <div class="product-card" id="card12">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <a href="/product"><img src="./images/card12.png" class="product-thumb" alt=""></a>
+                    <button class="card-btn">add to whislist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">brand</h2>
+                    <p class="product-short-des">a short line about the cloth..</p>
+                    <span class="price">$20</span><span class="actual-price">$40</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <%- include("partials/footer.ejs") %>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="./header.js"></script>
+    <script src="./home.js"></script>
+    <script src="./product.js"></script>
+</body>
+</html>
